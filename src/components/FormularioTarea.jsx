@@ -18,6 +18,15 @@ function FormularioTarea() {
     setTarea('');
   };
 
+  const borrarTareas = (nombreTarea)=> {
+    // Borramos la tarea con el metodo filter 
+    const nuevoArrayTareas = arrayTareas.filter((elementoTarea)=> elementoTarea !== nombreTarea);
+    
+    // Actualizamos el state arrayTareas 
+    setArrayTareas(nuevoArrayTareas);
+  }
+
+
   return (
     <section>
       <Form className="mb-5" onSubmit={handleSubmit}>
@@ -33,7 +42,7 @@ function FormularioTarea() {
           </Button>{" "}
         </Form.Group>
       </Form>
-      <ListaTareas arrayTareas={arrayTareas}></ListaTareas>
+      <ListaTareas arrayTareas={arrayTareas} borrarTareas={borrarTareas}></ListaTareas>
     </section>
   );
 }
