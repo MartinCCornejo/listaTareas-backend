@@ -6,9 +6,21 @@ function FormularioTarea() {
   const [tarea, setTarea] = useState("");
   const [arrayTareas, setArrayTareas] = useState([]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // console.log('Desde el evento submit')
+
+    // Guardar el state tarea en el arrayTareas 
+    // spread ... 
+    setArrayTareas([...arrayTareas,tarea]); 
+
+    // Limpiamos el formulario 
+    setTarea('');
+  };
+
   return (
     <section>
-      <Form className="mb-5">
+      <Form className="mb-5" onSubmit={handleSubmit}>
         <Form.Group className="mb-3 d-flex" controlId="formularioTarea">
           <Form.Control
             type="text"
