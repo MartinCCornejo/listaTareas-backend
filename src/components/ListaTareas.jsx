@@ -1,11 +1,13 @@
-import ListGroup from 'react-bootstrap/ListGroup';
-import ItemTarea from './ItemTarea';
+import ListGroup from "react-bootstrap/ListGroup";
+import ItemTarea from "./ItemTarea";
 
-function listaTareas() {
+function listaTareas({ arrayTareas }) {
   return (
-      <ListGroup>
-        <ItemTarea></ItemTarea>
-      </ListGroup>
+    <ListGroup>
+      {
+        arrayTareas.map((tarea,posicion) => (<ItemTarea key={posicion} tarea={tarea}></ItemTarea>))
+      }
+    </ListGroup>
   );
 }
 
