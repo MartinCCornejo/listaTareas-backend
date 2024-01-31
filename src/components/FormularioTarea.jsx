@@ -1,7 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import ListaTareas from "./ListaTareas";
 import { useState } from "react";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 function FormularioTarea() {
   const [tarea, setTarea] = useState("");
@@ -9,7 +9,6 @@ function FormularioTarea() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // console.log('Desde el evento submit')
 
     // Guardar el state tarea en el arrayTareas
     // spread ...
@@ -39,19 +38,18 @@ function FormularioTarea() {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Si, borrar",
-      cancelButtonText: "Cancelar"
+      cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
           title: "Tarea borrada!",
           text: "La tarea se elimino correctamente.",
-          icon: "success"
+          icon: "success",
         });
+        // Actualizamos el state arrayTareas
         setArrayTareas(nuevoArrayTareas);
       }
     });
-
-    // Actualizamos el state arrayTareas
   };
 
   return (
@@ -64,7 +62,12 @@ function FormularioTarea() {
             onChange={(e) => setTarea(e.target.value)}
             value={tarea}
           />
-          <Button variant="dark" type="submit" className="ms-2">
+          <Button
+            variant="dark"
+            type="submit"
+            className="ms-2"
+            disabled={tarea.length < 3}
+          >
             Agregar
           </Button>{" "}
         </Form.Group>
