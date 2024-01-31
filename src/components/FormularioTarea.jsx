@@ -1,6 +1,7 @@
 import { Button, Form } from "react-bootstrap";
 import ListaTareas from "./ListaTareas";
 import { useState } from "react";
+import Swal from 'sweetalert2'
 
 function FormularioTarea() {
   const [tarea, setTarea] = useState("");
@@ -10,22 +11,48 @@ function FormularioTarea() {
     e.preventDefault();
     // console.log('Desde el evento submit')
 
-    // Guardar el state tarea en el arrayTareas 
-    // spread ... 
-    setArrayTareas([...arrayTareas,tarea]); 
+    // Guardar el state tarea en el arrayTareas
+    // spread ...
+    setArrayTareas([...arrayTareas, tarea]);
 
-    // Limpiamos el formulario 
-    setTarea('');
+    Swal.fire({
+      title: "Bien hecho!",
+      text: "La tarea se agrego correctamente",
+      icon: "success",
+    });
+
+    // Limpiamos el formulario
+    setTarea("");
   };
 
-  const borrarTareas = (nombreTarea)=> {
-    // Borramos la tarea con el metodo filter 
-    const nuevoArrayTareas = arrayTareas.filter((elementoTarea)=> elementoTarea !== nombreTarea);
-    
-    // Actualizamos el state arrayTareas 
-    setArrayTareas(nuevoArrayTareas);
-  }
+  const borrarTareas = (nombreTarea) => {
+    // Borramos la tarea con el metodo filter
+    const nuevoArrayTareas = arrayTareas.filter(
+      (elementoTarea) => elementoTarea !== nombreTarea
+    );
 
+    Swal.fire({
+      title: "Estas seguro de borrar esta tarea?",
+      text: "Luego no podras revertir esta acción!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, borrar",
+      cancelButtonText: "Cancelar"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Tarea borrada!",
+          text: "La tarea se elimino correctamente.",
+          icon: "success"
+        });
+        setArrayTareas(nuevoArrayTareas);
+      }
+    });
+
+    // Actualizamos el state arrayTareas
+  };
 
   return (
     <section>
@@ -42,7 +69,10 @@ function FormularioTarea() {
           </Button>{" "}
         </Form.Group>
       </Form>
-      <ListaTareas arrayTareas={arrayTareas} borrarTareas={borrarTareas}></ListaTareas>
+      <ListaTareas
+        arrayTareas={arrayTareas}
+        borrarTareas={borrarTareas}
+      ></ListaTareas>
     </section>
   );
 }
