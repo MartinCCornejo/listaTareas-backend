@@ -1,11 +1,18 @@
 import { Button, Form } from "react-bootstrap";
 import ListaTareas from "./ListaTareas";
-import { useState } from "react";
+import { useState, useEffect} from "react";
 import Swal from "sweetalert2";
 
 function FormularioTarea() {
   const [tarea, setTarea] = useState("");
-  const [arrayTareas, setArrayTareas] = useState([]);
+  const tareasLocalStorage = JSON.parse(localStorage.getItem('tareasLocal')) || [];
+  const [arrayTareas, setArrayTareas] = useState(tareasLocalStorage);
+
+
+  useEffect(()=>{
+    console.log('Usando useEffect');
+    localStorage.setItem('tareasLocal',JSON.stringify(arrayTareas));
+  },[arrayTareas])
 
   const handleSubmit = (e) => {
     e.preventDefault();
