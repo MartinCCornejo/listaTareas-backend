@@ -10,7 +10,7 @@ En este ejercicio, se busca crear una aplicación web que muestre una lista de t
 
 2. Navega al directorio del proyecto:
     ```bash
-    cd nombre-del-proyecto
+    cd listaTareas
 
 3. Instala las dependencias utilizando npm o yarn:
     ```bash
