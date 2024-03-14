@@ -12,11 +12,9 @@ En este ejercicio, se busca crear una aplicación web que muestre una lista de t
     ```bash
     cd listaTareas
 
-3. Instala las dependencias utilizando npm o yarn:
+3. Instala las dependencias utilizando npm:
     ```bash
     npm install
-     o
-    yarn install
 
 4. Ejecuta la aplicación en modo desarrollo:
     ```bash

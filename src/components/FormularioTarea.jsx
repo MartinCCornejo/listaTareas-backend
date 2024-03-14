@@ -10,7 +10,7 @@ function FormularioTarea() {
 
 
   useEffect(()=>{
-    console.log('Usando useEffect');
+    // console.log('Usando useEffect');
     localStorage.setItem('tareasLocal',JSON.stringify(arrayTareas));
   },[arrayTareas])
 
