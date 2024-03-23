@@ -57,3 +57,14 @@ export async function editarTareaAPI (nombreTarea,id) {
         console.log(error);
     }
 }
+
+// Funcion para obtener una tarea por su id 
+export async function obtenerTareaAPI (id) {
+    try {
+        const respuesta = await fetch(`${URI_TAREA}/${id}`);
+        return respuesta;
+
+    } catch (error) {
+        console.log(error)
+    }
+}
