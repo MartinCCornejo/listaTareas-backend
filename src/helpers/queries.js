@@ -26,3 +26,14 @@ export async function listarTareasAPI () {
         console.log(error)
     }
 }
+
+export async function borrarTareaAPI (id){
+    try {
+        const respuesta = await fetch(`${URI_TAREA}/${id}`,{
+            method: "DELETE"
+        })
+        return respuesta;
+    } catch (error) {
+        console.log(error)
+    }
+}

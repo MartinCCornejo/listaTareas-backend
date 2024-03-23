@@ -35,7 +35,7 @@ function ListaTareas() {
   return (
     <ListGroup>
       {
-        tareas.map((tarea) => (<ItemTarea  key={tarea.id} tarea={tarea.nombreTarea}></ItemTarea>))
+        tareas.map((tarea) => (<ItemTarea  key={tarea.id} tarea={tarea} setTareas={setTareas}></ItemTarea>))
       }
     </ListGroup>
   );
