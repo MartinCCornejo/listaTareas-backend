@@ -41,7 +41,7 @@ export async function borrarTareaAPI (id){
 }
 
 // Función para editar una tarea 
-export async function editarTarea (nombreTarea,id) {
+export async function editarTareaAPI (nombreTarea,id) {
     try {
         const respuesta = await fetch(`${URI_TAREA}/${id}`,{
             method: "PUT",
