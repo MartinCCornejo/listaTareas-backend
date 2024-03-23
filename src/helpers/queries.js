@@ -32,7 +32,6 @@ export async function borrarTareaAPI (id){
         const respuesta = await fetch(`${URI_TAREA}/${id}`,{
             method: "DELETE"
         })
-        console.log(respuesta);
         return respuesta;
     } catch (error) {
         console.log(error)
