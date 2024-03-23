@@ -1,8 +1,8 @@
 import { Button, Form } from "react-bootstrap";
 import ListaTareas from "./ListaTareas";
-import { useState, useEffect} from "react";
+import { useState} from "react";
 import Swal from "sweetalert2";
-import { crearTarea } from "../helpers/queries";
+import { crearTareaAPI } from "../helpers/queries";
 
 function FormularioTarea() {
 
@@ -12,7 +12,7 @@ function FormularioTarea() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const respuesta = await crearTarea(tarea);
+    const respuesta = await crearTareaAPI(tarea);
     
     if (respuesta.status === 201) {
       Swal.fire({
@@ -29,6 +29,8 @@ function FormularioTarea() {
       });
     }
   };
+
+
 
   // const borrarTareas = (nombreTarea) => {
   //   // Borramos la tarea con el metodo filter
