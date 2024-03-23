@@ -8,12 +8,11 @@ export async function crearTarea (tareaNueva) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify(tareaNueva)
+            body: JSON.stringify({tareaNueva})
         });
-        console.log(respuesta);
         return respuesta;
         
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }

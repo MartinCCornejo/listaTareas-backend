@@ -6,21 +6,28 @@ import { crearTarea } from "../helpers/queries";
 
 function FormularioTarea() {
 
+  const [tarea,setTarea] = useState("");
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const respuesta = await crearTarea();
-    // Guardar el state tarea en el arrayTareas
-    // spread ...
-    crearTarea()
 
-    // Swal.fire({
-    //   title: "Bien hecho!",
-    //   text: "La tarea se agrego correctamente",
-    //   icon: "success",
-    // });
-
-    // Limpiamos el formulario
+    const respuesta = await crearTarea(tarea);
+    
+    if (respuesta.status === 201) {
+      Swal.fire({
+        title: "¡Bien hecho!",
+        text: "La tarea se agregó correctamente",
+        icon: "success",
+      });
+      setTarea("");
+    } else {
+      Swal.fire({
+        title: "¡Error!",
+        text: "No se pudo agregar la tarea, intente de nuevo en unos minutos...",
+        icon: "error",
+      });
+    }
   };
 
   // const borrarTareas = (nombreTarea) => {
@@ -71,10 +78,7 @@ function FormularioTarea() {
           </Button>{" "}
         </Form.Group>
       </Form>
-      <ListaTareas
-        arrayTareas={arrayTareas}
-        borrarTareas={borrarTareas}
-      ></ListaTareas>
+      <ListaTareas></ListaTareas>
     </section>
   );
 }
