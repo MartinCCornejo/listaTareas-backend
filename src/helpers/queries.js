@@ -17,6 +17,7 @@ export async function crearTareaAPI (nombreTarea) {
     }
 }
 
+// Función para obtener las tareas 
 export async function listarTareasAPI () {
     try {
         const respuesta = await fetch(URI_TAREA);
@@ -27,12 +28,42 @@ export async function listarTareasAPI () {
     }
 }
 
+// Función para eliminar una tarea
 export async function borrarTareaAPI (id){
     try {
         const respuesta = await fetch(`${URI_TAREA}/${id}`,{
             method: "DELETE"
         })
         return respuesta;
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+// Función para editar una tarea 
+export async function editarTareaAPI (nombreTarea,id) {
+    try {
+        const respuesta = await fetch(`${URI_TAREA}/${id}`,{
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({nombreTarea})
+        });
+        console.log(respuesta)
+        return respuesta;
+        
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// Funcion para obtener una tarea por su id 
+export async function obtenerTareaAPI (id) {
+    try {
+        const respuesta = await fetch(`${URI_TAREA}/${id}`);
+        return respuesta;
+
     } catch (error) {
         console.log(error)
     }

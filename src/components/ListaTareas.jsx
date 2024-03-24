@@ -4,7 +4,7 @@ import { listarTareasAPI } from "../helpers/queries";
 import { useEffect, useState } from "react";
 import Swal from "sweetalert2";
 
-function ListaTareas() {
+function ListaTareas({setTarea}) {
   const [tareas,setTareas] = useState([]);
 
   useEffect(()=>{
@@ -35,7 +35,7 @@ function ListaTareas() {
   return (
     <ListGroup>
       {
-        tareas.map((tarea) => (<ItemTarea  key={tarea.id} tarea={tarea} setTareas={setTareas}></ItemTarea>))
+        tareas.map((tarea) => (<ItemTarea setTarea={setTarea} key={tarea.id} tarea={tarea} ></ItemTarea>))
       }
     </ListGroup>
   );
