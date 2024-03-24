@@ -1,23 +1,30 @@
+import React, { useState } from "react";
 import { ListGroup, Button, Modal, Form } from "react-bootstrap";
-import { borrarTareaAPI } from "../helpers/queries";
+import { borrarTareaAPI, editarTareaAPI } from "../helpers/queries";
 import Swal from "sweetalert2";
-import { useState } from "react";
 
-const ItemTarea = ({ tarea , setTarea}) => {
+const ItemTarea = ({ tarea, setTarea }) => {
   const [show, setShow] = useState(false);
+  const [tareaEditada, setTareaEditada] = useState({
+    id: tarea.id,
+    nombreTarea: tarea.nombreTarea,
+  });
 
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false);
+    setTareaEditada({ id: tarea.id, nombreTarea: tarea.nombreTarea });
+  };
   const handleShow = () => setShow(true);
 
   const borrarTarea = () => {
     Swal.fire({
-      title: "Estas seguro de borrar esta tarea?",
-      text: "Luego no podras revertir esta acción!",
+      title: "¿Estás seguro de borrar esta tarea?",
+      text: "Esta acción no se puede revertir",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Si, borrar",
+      confirmButtonText: "Sí, borrar",
       cancelButtonText: "Cancelar",
     }).then(async (result) => {
       if (result.isConfirmed) {
@@ -30,8 +37,8 @@ const ItemTarea = ({ tarea , setTarea}) => {
           });
         } else {
           Swal.fire({
-            title: "Ocurrio un error!",
-            text: `La tarea '${tarea.nombreTarea}' NO fue eliminada, intente esta operación en unos minutos.`,
+            title: "Error",
+            text: `La tarea '${tarea.nombreTarea}' no pudo ser eliminada. Inténtalo de nuevo más tarde.`,
             icon: "error",
           });
         }
@@ -39,22 +46,23 @@ const ItemTarea = ({ tarea , setTarea}) => {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const guardarCambios = async () => {
+    const respuesta = await editarTareaAPI(
+      tareaEditada.nombreTarea,
+      tareaEditada.id
+    );
 
-    const respuesta = await crearTareaAPI(tarea);
-    
-    if (respuesta.status === 201) {
+    if (respuesta.status === 200) {
+      handleClose(); // Cerrar modal después de editar la tarea
       Swal.fire({
-        title: "¡Bien hecho!",
-        text: "La tarea se agregó correctamente",
+        title: "Tarea editada",
+        text: "La tarea se editó correctamente",
         icon: "success",
       });
-      setTarea("");
     } else {
       Swal.fire({
-        title: "¡Error!",
-        text: "No se pudo agregar la tarea, intente de nuevo en unos minutos...",
+        title: "Error",
+        text: "No se pudo editar la tarea. Inténtalo de nuevo más tarde.",
         icon: "error",
       });
     }
@@ -67,35 +75,36 @@ const ItemTarea = ({ tarea , setTarea}) => {
           <Modal.Title>Modificar tarea</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Form className="mb-5" onSubmit={handleSubmit}>
-        <Form.Group className="mb-3 d-flex" controlId="formularioTarea">
-          <Form.Control
-            type="text"
-            placeholder="Ej: Tarea 1"
-            onChange={(e) => setTarea(e.target.value)}
-            value={tarea}
-          />
-          <Button
-            variant="dark"
-            type="submit"
-            className="ms-2"
-            disabled={tarea.length < 3}
-          >
-            Agregar
-          </Button>{" "}
-        </Form.Group>
-      </Form>
+          <Form>
+            <Form.Group className="mb-3 d-flex" controlId="formularioTarea">
+              <Form.Control
+                type="text"
+                value={tareaEditada.nombreTarea}
+                onChange={(e) =>
+                  setTareaEditada({
+                    ...tareaEditada,
+                    nombreTarea: e.target.value,
+                  })
+                }
+              />
+            </Form.Group>
+          </Form>
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            Cerrar
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button
+            variant="primary"
+            onClick={guardarCambios}
+            disabled={tareaEditada.nombreTarea.length < 3}
+            type="submit"
+          >
+            Guardar cambios
           </Button>
         </Modal.Footer>
       </Modal>
-      ;
+
       <ListGroup.Item className="d-flex justify-content-between align-items-center fw-medium box-shadow mb-3 text-break">
         {tarea.nombreTarea}
         <div>
