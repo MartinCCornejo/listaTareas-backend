@@ -1,3 +1,16 @@
 {
-  "tareas": []
+  "tareas": [
+    {
+      "nombreTarea": "Tarea 1",
+      "id": "b43f"
+    },
+    {
+      "id": "2a37",
+      "nombreTarea": "Tarea 2"
+    },
+    {
+      "id": "c482",
+      "nombreTarea": "Tarea 3"
+    }
+  ]
 }

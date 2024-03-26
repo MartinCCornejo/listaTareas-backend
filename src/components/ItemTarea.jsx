@@ -98,7 +98,6 @@ const ItemTarea = ({ tarea, setTarea }) => {
             variant="primary"
             onClick={guardarCambios}
             disabled={tareaEditada.nombreTarea.length < 3}
-            type="submit"
           >
             Guardar cambios
           </Button>

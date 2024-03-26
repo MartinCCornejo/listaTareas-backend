@@ -1,38 +1,25 @@
-# Ejercicio 4: Lista de Tareas
+# Lista de Tareas con Json-server
 
 ## Descripción
-En este ejercicio, se busca crear una aplicación web que muestre una lista de tareas. Al ingresar una tarea en el input y presionar enter, la tarea debe mostrarse en una lista.
+En este ejercicio, se busca crear una aplicación web que muestre una lista de tareas. Que pueda agregar
+una tarea, listar todas las tareas existentes, borrar una tarea, editar una tarea y
+obtener una tarea por el nombre o identificador único. 
 
 ## Instrucciones
 1. Clona este repositorio en tu máquina local utilizando el siguiente comando:
    ```bash
-   git clone https://github.com/MartinCCornejo/ejerciciosReact-ListaTareas.git
+   git clone https://github.com/MartinCCornejo/listaTareas-backend.git
 
-2. Navega al directorio del proyecto:
-    ```bash
-    cd listaTareas
 
-3. Instala las dependencias utilizando npm o yarn:
+2. Instala las dependencias:
     ```bash
     npm install
-     o
-    yarn install
 
-4. Ejecuta la aplicación en modo desarrollo:
+3. Ejecuta la aplicación en modo desarrollo:
     ```bash
     npm run dev
 
-
-## Funcionalidades
-
-* Ingresa una tarea en el input y presiona enter para agregarla a la lista.
-* Cada tarea agregada debe mostrarse en la lista.
-
-
-## Notas adicionales
-
-* Asegúrate de tener Node.js y npm (o yarn) instalados en tu máquina.
-* Si encuentras algún problema o tienes preguntas, no dudes en comunicarte conmigo.
-
-¡Disfruta del ejercicio!
+4. Ejecuta json-server:
+    ```bash
+    npx json-server db.json
 
