@@ -8,7 +8,6 @@ function FormularioTarea() {
 
   const [tarea,setTarea] = useState("");
 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 
